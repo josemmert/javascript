@@ -39,9 +39,21 @@ mensaje=50
 console.log(mensaje)
 document.write('<br>' + mensaje)
 
+let numero_1=10;
+let numero_2=20;
+let suma= numero_1 + numero_2
+console.log(numero_1 + numero_2);
+
+document.write('<br>' + (numero_1 + numero_2))
+
+document.write('<br> El resultado de la suma es:' + suma)
 // Esto es un error --> token='otro token'; (NO SE PUEDE CAMBIAR EL VALOR DE UNA CONSTANTE)
 
 //imprimir datos en el documento html
 
 // document.write('Esto es un document.write');
+//Alert
 
+alert('Hola mundo con un ALERT');
+alert('<br> El resultado de la suma es:' + suma);
+alert('<br>' + (numero_1 + numero_2));
