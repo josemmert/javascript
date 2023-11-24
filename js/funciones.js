@@ -18,7 +18,7 @@ suma=a+ b;
 
 console.log('El resultado de sumar a + b es: ', suma);
 
-//Funciones declarativa
+//FUNCIONES DECLARATIVAS
 
 function funcionSuma(numero1,numero2) {
     let suma=numero1 + numero2;
@@ -58,3 +58,29 @@ let resultado=division(4,2);
 console.log('El resultado de la division es: ', resultado);
 
 console.log('El resultado de dividir 0 en 0 es: ', division(0,0));
+
+//FUNCIONES ANONIMAS
+//no se puede invocar a una funcion anonima antes de su declaracion
+//miFuncion(3,2);
+
+const miFuncion=function(a,b) {
+    console.log(a+b);
+}
+
+miFuncion(2,2)
+
+// FUNCIONES FLECHAS - ARROW FUNCTION
+//no se puede invocar a una funcion flecha antes de su declaracion
+
+const miFuncionFlecha=(a,b)=>{
+    return a * b;
+}
+console.log('El resultado de usar mi funcion flecha es:', miFuncionFlecha(5,5));
+
+// CALLBACKS
+
+const funcionCallback=(nombre, apellido, callback)=>{
+    callback(nombre, apellido);
+};
+
+funcionCallback('Valentin', 'Quiroga', saludar);
