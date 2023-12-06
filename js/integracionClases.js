@@ -39,7 +39,10 @@ class Alumno extends Persona{
 
 class Sistema{
     constructor(){
-        this.almacenamiento=[];
+        /**const lsValue=localstorage.getItem('almacenamiento')
+         * 
+         */
+        this.almacenamiento=JSON.parse(localStorage.getItem('almacenamiento')) || [];
     };
 
     existeUsuario(usuario){
@@ -70,6 +73,14 @@ class Sistema{
         }
     };
 
+    mostrarInformacion(object){
+        let str='';
+        for (const key in object) {
+            str+=`${key}: ${object[key]} - `
+        }
+        return str;
+    }
+
     listarTodo(){
 
         if (this.almacenamiento.length===0) {
@@ -79,7 +90,7 @@ class Sistema{
         } else {
 
             this.almacenamiento.forEach((element, index)=>{
-                console.log(`${index+1}: ${element.mostrarInformacion()}`);
+                console.log(`${index+1}: ${this.mostrarInformacion(element)}`);
             });
 
         }
@@ -90,7 +101,7 @@ class Sistema{
         const mentores=this.almacenamiento.filter((element)=>element.rol==='Mentor');
         if (mentores.length>0) {
             mentores.forEach((element, index)=>{
-                console.log(`${index+1}: ${element.mostrarInformacion()}`);
+                console.log(`${index+1}: ${this.mostrarInformacion(element)}`);
             })
         } else {
             console.log('Aun no hay registros de MENTORES');
@@ -101,7 +112,7 @@ class Sistema{
         const alumnos=this.almacenamiento.filter((element)=>element.rol==='Alumno');
         if (alumnos.length>0) {
             alumnos.forEach((element, index)=>{
-                console.log(`${index+1}: ${element.mostrarInformacion()}`);
+                console.log(`${index+1}: ${this.mostrarInformacion(element)}`);
             })
         } else {
             console.log('Aun no hay registros de ALUMNOS');
@@ -126,8 +137,24 @@ do {
             const mentor=new Mentor(nombreM, apeliidoM, dniM, materiaM);
             system.crearMentor(mentor);
             break;
+
+        case 2:
+            let nombreA=prompt('Ingrese el nombre');
+            let apeliidoA=prompt('Ingrese el apellido');
+            let dniA=prompt('Ingrese el dni');
+            let cursoA=prompt('Ingrese el curso');
+            let becadoA=confirm('¿Es becado?, Si es si, seleccione aceptar');
+            const alumno=new Alumno(nombreA,apeliidoA,dniA,cursoA, becadoA);
+            system.crearAlumno(alumno);
+            break;
         case 3:
             system.listarTodo();
+            break;
+        case 4:
+            system.listarMentor();
+            break;
+        case 5:
+            system.listarAlumnos();
             break;
         default:
             console.error(`OPCION INGRESADA INVALIDA: INGRESO --> ${opcion} `);
@@ -135,3 +162,18 @@ do {
     }
 
 } while (confirm('¿Desea continuar operando?'));
+
+console.log('###Almacenamiento-->', system.almacenamiento);
+
+localStorage.setItem('almacenamiento', JSON.stringify(system.almacenamiento))
+
+/**
+ * PASOS:
+ * 1- COMPROBAR SI EXISTE UN LS ALMACENADO --> localStorage.getItem(almacenamiento): puede ser un string o null
+ * si es un string, necesito convertirlo de nuevo a un array --> JSON.parse[resultado localStorage];
+ * 1-b- si es null, necesitamos crear un localStorage--> localStorage.setItem('almacenamiento', JSON.stringify())
+ * 
+ * 
+ * 
+ * 
+ */
