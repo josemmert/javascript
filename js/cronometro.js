@@ -18,12 +18,12 @@ function Iniciar() {
 
 function Pausar() {
     window.clearInterval(idInterval);
-    
+    idInterval=undefined;
 };
 
 function Reiniciar() {
     window.clearInterval(idInterval);
-    let idInterval=undefined;
+    idInterval=undefined;
     horas=0;
     minutos=0;
     segundos=0;
